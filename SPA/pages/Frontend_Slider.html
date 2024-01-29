@@ -1,0 +1,180 @@
+<!--begin::Toolbar-->
+<div id="kt_app_toolbar" class="app-toolbar py-3 py-lg-6">
+    <div id="kt_app_toolbar_container" class="app-container container-xxl d-flex flex-stack">
+        <div class="page-title d-flex flex-column justify-content-center flex-wrap me-3 w-100">
+            <h1 class="page-heading d-flex text-dark fw-bold fs-3 flex-column justify-content-center my-0">
+                Slider</h1>
+            <ul class="breadcrumb breadcrumb-dot fw-semibold fs-7 my-0 pt-1">
+                <li class="breadcrumb-item text-muted">
+                    <a href="" class="text-muted text-hover-primary">Beranda</a>
+                </li>
+                <li class="breadcrumb-item text-muted">Frontend</li>
+                <li class="breadcrumb-item text-muted">Slider</li>
+            </ul>
+            <div class="pt-5">
+                <div class="alert bg-light-danger border border-danger border-dashed d-flex flex-column flex-sm-row w-100 p-5" style="width: 100%;">
+                    <i class="ki-duotone ki-information fs-2hx me-4 text-danger mb-5"><span class="path1"></span><span class="path2"></span><span class="path3"></span></i>
+                    <!--begin::Content-->
+                    <div class="d-flex flex-column pe-0 pe-sm-10">
+                        <h5 class="mb-1">PERINGATAN</h5>
+                        <span>Jangan merubah selain yang berkepentingan</span>
+                    </div>
+                    <!--end::Content-->
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<!--end::Toolbar-->
+<!--begin::Content-->
+<div id="kt_app_content" class="app-content flex-column-fluid">
+    <div id="kt_app_content_container" class="app-container container-xxl">
+        <div class="card card-flush">
+            <!--begin::Card header-->
+            <div class="card-header align-items-center py-5 gap-2 gap-md-5">
+                <!--begin::Card title-->
+                <div class="card-title">
+                    <!--begin::Search-->
+                    <div class="d-flex align-items-center position-relative my-1">
+                        <i class="ki-duotone ki-magnifier fs-3 position-absolute ms-4">
+                            <span class="path1"></span>
+                            <span class="path2"></span>
+                        </i>
+                        <input type="text" table-search="search"
+                            class="form-control form-control-solid w-250px ps-12"
+                            placeholder="Cari..." />
+                    </div>
+                    <!--end::Search-->
+                    <!--begin::Export buttons-->
+                    <div id="table-export" class="d-none"></div>
+                    <!--end::Export buttons-->
+                </div>
+                <!--end::Card title-->
+                <!--begin::Card toolbar-->
+                <div class="card-toolbar flex-row-fluid justify-content-end gap-5">
+                    <!--begin::Export dropdown-->
+                    <button type="button" class="btn btn-light-primary"
+                        data-kt-menu-trigger="click" data-kt-menu-placement="bottom-end">
+                        <i class="ki-duotone ki-exit-up fs-2">
+                            <span class="path1"></span>
+                            <span class="path2"></span>
+                        </i>Expor Data</button>
+                    <!--begin::Menu-->
+                    <div id="table_export"
+                        class="menu menu-sub menu-sub-dropdown menu-column menu-rounded menu-gray-600 menu-state-bg-light-primary fw-semibold fs-7 w-200px py-4"
+                        data-kt-menu="true">
+                        <!--begin::Menu item-->
+                        <div class="menu-item px-3">
+                            <a href="#" class="menu-link px-3"
+                                table-export="copy">Salin</a>
+                        </div>
+                        <!--end::Menu item-->
+                        <!--begin::Menu item-->
+                        <div class="menu-item px-3">
+                            <a href="#" class="menu-link px-3"
+                                table-export="excel">Excel</a>
+                        </div>
+                        <!--end::Menu item-->
+                        <!--begin::Menu item-->
+                        <div class="menu-item px-3">
+                            <a href="#" class="menu-link px-3"
+                                table-export="csv">CSV</a>
+                        </div>
+                        <!--end::Menu item-->
+                        <!--begin::Menu item-->
+                        <div class="menu-item px-3">
+                            <a href="#" class="menu-link px-3"
+                                table-export="pdf">PDF</a>
+                        </div>
+                        <!--end::Menu item-->
+                    </div>
+                    <!--end::Menu-->
+                    <!--end::Export dropdown-->
+                    <button class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#modalTambah">
+                    <i class="ki-duotone ki-plus fs-2"></i>Tambah Data</button>
+                </div>
+                <!--end::Card toolbar-->
+            </div>
+            <!--end::Card header-->
+            <!--begin::Card body-->
+            <div class="card-body pt-0">
+                <!--begin::Table-->
+                <div class="table-responsive">
+                    <table class="table table-bordered align-middle"
+                        id="table">
+                        <thead  class="fw-bold fs-7 text-uppercase text-gray-900 text-nowrap">
+                            <tr>
+                                <th class="pe-3">No.</th>
+                                <th class="pe-3">Gambar</th>
+                                <th class="pe-3">Judul</th>
+                                <th class="pe-3">Sub Judul</th>
+                                <th class="pe-3 min-w-125px">Konten</th>
+                                <th class="pe-3">Link</th>
+                                <th class="pe-3">Posisi</th>
+                                <th class="pe-3">Ditambahkan pada</th>
+                                <th class="pe-3">Diperbarui pada</th>
+                                <th class="pe-3">Aksi</th>
+                            </tr>
+                        </thead>
+                        <tbody class="fw-semibold text-gray-700">
+                            <tr>
+                                <td>1.</td>
+                                <td class="text-center">
+                                    <div class="d-flex align-items-center">
+                                        <div class="">
+                                            <!--begin::Overlay-->
+                                            <a class="d-block overlay" data-fslightbox="lightbox-basic" href="../assets/media/stock/900x600/23.jpg">
+                                                <!--begin::Image-->
+                                                <div class="symbol symbol-50px">
+                                                    <img src="../assets/media/stock/900x600/23.jpg">
+                                                </div>
+                                                <!--end::Image-->
+
+                                                <!--begin::Action-->
+                                                <div class="overlay-layer card-rounded bg-dark bg-opacity-25 shadow">
+                                                    <i class="bi bi-eye-fill text-white"></i>
+                                                </div>
+                                                <!--end::Action-->
+                                            </a>
+                                            <!--end::Overlay-->
+                                        </div>
+                                    </div>
+                                </td>
+                                <td class="min-w-125px">Sistem Akuntabilitas Kinerja Instansi Pemerintah</td>
+                                <td>SAKIP MOBILE DPKPCK</td>
+                                <td class="min-w-500px">Adalah sebuah sistem yang berbasis elektronik sebagai upaya peningkatan kualitas pelaksanaan akuntabilitas kinerja di lingkungan instansi pemerintah untuk meningkatkan efektivitas dan efisiensi penggunaan anggaran pada Satuan Kerja Perangkat Daerah Dinas Cipta Karya Kabupaten Malang.</td>
+                                <td class="text-end">#</td>
+                                <td class="text-end">1</td>
+                                <td class="text-end">2022-04-06 19:27:51</td>
+                                <td class="text-end">2022-04-06 19:27:51</td>
+                                <td class="text-end text-nowrap">
+                                    <button class="btn btn-icon btn-bg-light btn-icon-primary btn-sm me-1" data-bs-toggle="tooltip" data-bs-custom-class="tooltip-inverse" data-bs-placement="bottom" title="Edit">
+                                        <i class="ki-duotone ki-pencil fs-2">
+                                            <span class="path1"></span>
+                                            <span class="path2"></span>
+                                        </i>
+                                    </button>
+                                    <button class="btn btn-icon btn-bg-light btn-icon-danger btn-sm" data-bs-toggle="tooltip" data-bs-custom-class="tooltip-inverse" data-bs-placement="bottom" title="Hapus" data-kt-permissions-table-filter="delete_row">
+                                        <i class="ki-duotone ki-trash fs-2">
+                                            <span class="path1"></span>
+                                            <span class="path2"></span>
+                                            <span class="path3"></span>
+                                            <span class="path4"></span>
+                                            <span class="path5"></span>
+                                        </i>
+                                    </button>
+                                </td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+                <!--end::Table-->
+            </div>
+            <!--end::Card body-->
+        </div>
+
+        
+    </div>
+    <!--end::Content-->
+</div>
+<!--end::Content wrapper-->

@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <title>Login</title>
+    <link rel="icon" href="logo.svg" type="image/gif" sizes="16x16">
+    <link rel="stylesheet" href="styles.css" />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600&display=swap"
+      rel="stylesheet"
+    />
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+  </head>
+  <body>
+
+    <div class="card">
+      <img src="logo.svg" draggable="false" />
+      <h2>Login</h2>
+      <p style="margin-top: 0;">Welcome to my site!</p>
+      <form class="form" onsubmit="return isFormValid();">
+        <input spellcheck="false" class="control" type="email" placeholder="Email" id="email"/>
+        <div class="error-message" id="email-error"></div>
+        <div class="password">
+          <input spellcheck="false" class="control" id="password" type="password" placeholder="Password" autocomplete="off"/>
+          <button class="toggle" type="button" onclick="togglePassword(this)"></button>
+        </div>
+        <div class="error-message" id="password-error"></div>
+        <button class="control" type="submit">Login</button>
+      </form>
+      <p>Don't have an account? <a href="#">Sign-Up</a></p>
+    </div>
+
+    <script type="text/javascript" src="main.js"></script>
+  </body>
+</html>

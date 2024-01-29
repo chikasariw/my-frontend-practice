@@ -1,0 +1,246 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <title>Pengeditan Gambar</title>
+    <meta charset="utf-8" />
+    <meta
+      name="viewport"
+      content="width=device-width, initial-scale=1.0, user-scalable=no, minimum-scale=1.0, maximum-scale=1.0"
+    />
+    <style>
+        #imageCanvas {
+            border: 2px solid #000;
+            /* Warna dan ketebalan border */
+        }
+    </style>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/fabric.js/4.0.0/fabric.min.js"></script>
+</head>
+
+<body>
+
+    <div class="container my-5">
+        <input class="form-control" type="file" id="imageUpload" accept="image/*">
+        
+        
+        <div class="btn-group my-3" role="button">
+            <button class="btn btn-primary" id="downloadImage">Unduh Gambar</button>
+            <button class="btn btn-secondary" id="bringToFront">Kirim ke Depan</button>
+            <button class="btn btn-secondary" id="sendToBack">Kirim ke Belakang</button>
+            <button class="btn btn-secondary" id="duplicateLayer">Duplikat Lapisan</button>
+            <button class="btn btn-outline-danger" id="deleteLayer">Hapus Lapisan</button>
+        </div>
+        
+        <div class="row">
+            <div class="col-md-6">
+                <canvas id="imageCanvas" width="500" height="500"></canvas>
+            </div>   
+            <div class="col-md-6">
+                <div class="card mb-3 shadow-0 border-1">
+                    <div class="card-body">
+                        <div class="row">
+                            <div class="col-md-4">
+                                <button class="btn btn-primary btn-sm" id="createRectangle">Buat Persegi Panjang</button>
+                            </div>
+                            <div class="col-md-8">
+                                
+                                <div id="rectangleOptions">
+                                    <div class="row">
+                                        <label class="col-md-6 form-label" for="rectColor">Warna Isi :</label>
+                                        <input class="col-md-6 form-control" type="color" id="rectColor" value="#FF5733"> <!-- Misalnya, warna isi default adalah merah (#FF5733) -->
+                                        <label class="col-md-6 form-label" for="rectOpacity">Tingkat Kehalusan :</label>
+                                        <input type="range" id="rectOpacity" min="0" max="1" step="0.1" value="0.5" class="col-md-6 form-control my-2">
+                                        <label class="col-md-6 form-label" for="rectBorderColor">Warna Border :</label>
+                                        <input class="col-md-6 form-control" type="color" id="rectBorderColor" value="#000000">
+                                        <label class="col-md-6 form-label" for="rectBorderWidth">Ketebalan Border :</label>
+                                        <input class="col-md-6 form-control mt-2" type="number" id="rectBorderWidth" min="1" value="2">
+                                        <!-- Misalnya, tingkat kehalusan default adalah 0.5 -->
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="card mb-3 shadow-0 border-1">
+                    <div class="card-body pb-0">
+                        <div class="row mb-3">
+                            <div class="col-md-4">
+                                <button class="btn btn-primary btn-sm" id="createLine">Buat Garis Panjang</button>
+                            </div>
+                            <div class="col-md-8 mb-0 pb-0">
+                                <div id="lineOptions">
+                                    <div class="row">
+                                        <label class="col-md-6 form-label" for="lineColor">Warna :</label>
+                                        <input class="col-md-6 form-control" type="color" id="lineColor" value="#000000"> <!-- Misalnya, warna default adalah hitam (#000000) -->
+                                        <label class="col-md-6 form-label" for="lineWidth">Ketebalan :</label>
+                                        <input class="col-md-6 mt-2 form-control" type="number" id="lineWidth" min="1" value="2"> <!-- Misalnya, ketebalan default adalah 2 -->
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="card">
+                    <div class="card-body pb-0">
+                        <div class="row mb-3">
+                            <div class="col-md-4">
+                                <button class="btn btn-primary btn-sm" id="addText">Tambahkan Teks</button>
+                            </div>
+                            <div class="col-md-8">
+                                <div id="textOptions">
+                                    <div class="row">
+                                        <label class="col-md-6 form-label" for="textColor">Warna Teks:</label>
+                                        <input class="col-md-6 form-control" type="color" id="textColor" value="#000000"> <!-- Misalnya, warna teks default adalah hitam (#000000) -->
+                                        <label class="col-md-6 form-label" for="textFontSize">Ukuran Font:</label>
+                                        <input class="col-md-6 form-control mt-2" type="number" id="textFontSize" min="1" value="16"> <!-- Misalnya, ukuran font default adalah 16 -->
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                
+                
+                
+            </div>         
+        </div>
+    
+    </div>
+    
+
+
+
+    <script>
+        var canvas = new fabric.Canvas('imageCanvas');
+        var imageUpload = document.getElementById('imageUpload');
+        var addText = document.getElementById('addText');
+        var textColor = document.getElementById('textColor');
+        var textFontSize = document.getElementById('textFontSize');
+        var downloadImage = document.getElementById('downloadImage');
+        var createLine = document.getElementById('createLine');
+        var createRectangle = document.getElementById('createRectangle');
+        var rectColor = document.getElementById('rectColor');
+        var rectOpacity = document.getElementById('rectOpacity');
+        var rectBorderColor = document.getElementById('rectBorderColor');
+        var rectBorderWidth = document.getElementById('rectBorderWidth');
+        var bringToFront = document.getElementById('bringToFront');
+        var sendToBack = document.getElementById('sendToBack');
+        var duplicateLayer = document.getElementById('duplicateLayer');
+        var deleteLayer = document.getElementById('deleteLayer');
+        var createLine = document.getElementById('createLine');
+        var lineColor = document.getElementById('lineColor');
+        var lineWidth = document.getElementById('lineWidth');
+        var rectOptions = document.getElementById('rectangleOptions');
+        var lineOptions = document.getElementById('lineOptions');
+
+        createLine.addEventListener('click', function () {
+            var color = lineColor.value; // Baca warna yang dipilih
+            var width = parseInt(lineWidth.value); // Baca ketebalan garis sebagai integer
+
+            var line = new fabric.Line([50, 50, 200, 50], {
+                fill: color, // Terapkan warna yang dipilih
+                stroke: color, // Terapkan warna yang dipilih
+                strokeWidth: width // Terapkan ketebalan garis yang dipilih
+            });
+            canvas.add(line);
+        });
+
+
+        bringToFront.addEventListener('click', function () {
+            var activeObject = canvas.getActiveObject();
+            if (activeObject) {
+                canvas.bringToFront(activeObject);
+            }
+        });
+
+        sendToBack.addEventListener('click', function () {
+            var activeObject = canvas.getActiveObject();
+            if (activeObject) {
+                canvas.sendToBack(activeObject);
+            }
+        });
+
+        duplicateLayer.addEventListener('click', function () {
+            var activeObject = canvas.getActiveObject();
+            if (activeObject) {
+                var clonedObject = fabric.util.object.clone(activeObject);
+                canvas.add(clonedObject);
+            }
+        });
+
+        deleteLayer.addEventListener('click', function () {
+            var activeObject = canvas.getActiveObject();
+            if (activeObject) {
+                canvas.remove(activeObject);
+            }
+        });
+
+
+        createRectangle.addEventListener('click', function () {
+            var fillColor = rectColor.value; // Baca warna isi yang dipilih
+            var opacity = parseFloat(rectOpacity.value); // Baca tingkat kehalusan yang dipilih dan konversi ke float
+            var borderColor = rectBorderColor.value; // Baca warna border yang dipilih
+            var borderWidth = parseInt(rectBorderWidth.value); // Baca ketebalan border sebagai integer
+
+            var rect = new fabric.Rect({
+                left: 100,
+                top: 100,
+                width: 100,
+                height: 50,
+                fill: fillColor, // Terapkan warna isi yang dipilih
+                opacity: opacity, // Terapkan tingkat kehalusan yang dipilih
+                stroke: borderColor, // Terapkan warna border yang dipilih
+                strokeWidth: borderWidth // Terapkan ketebalan border yang dipilih
+            });
+            canvas.add(rect);
+        });
+
+
+
+
+        // Tambahkan tindakan saat gambar diunggah
+        imageUpload.addEventListener('change', function (e) {
+            var file = e.target.files[0];
+            var reader = new FileReader();
+
+            reader.onload = function (e) {
+                var img = new Image();
+                img.src = e.target.result;
+
+                img.onload = function () {
+                    var fabricImg = new fabric.Image(img);
+                    canvas.add(fabricImg);
+                };
+            };
+
+            reader.readAsDataURL(file);
+        });
+
+        addText.addEventListener('click', function () {
+            var color = textColor.value; // Baca warna teks yang dipilih
+            var fontSize = parseInt(textFontSize.value); // Baca ukuran font sebagai integer
+
+            var text = new fabric.IText('Tambahkan teks di sini', {
+                left: 100,
+                top: 100,
+                fill: color, // Terapkan warna teks yang dipilih
+                fontSize: fontSize // Terapkan ukuran font yang dipilih
+            });
+            canvas.add(text);
+        });
+
+
+
+        // Unduh gambar yang diedit
+        downloadImage.addEventListener('click', function () {
+            var dataURL = canvas.toDataURL({ format: 'png' });
+            var a = document.createElement('a');
+            a.href = dataURL;
+            a.download = 'edited_image.png';
+            a.click();
+        });
+    </script>
+</body>
+
+</html>

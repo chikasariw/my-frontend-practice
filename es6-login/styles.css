@@ -1,0 +1,157 @@
+* {
+  box-sizing: border-box;
+}
+
+html,
+body,
+.wrapper {
+  height: 100%;
+}
+
+@keyframes rotate {
+  100% {
+    background-position: 0% 50%;
+  }
+}
+
+body {
+  display: grid;
+  place-items: center;
+  margin: 0;
+  background: #e8f2f7;
+  font-family: "Euclid Circular A", "Poppins" !important;
+  color: #3a334e;
+  animation: rotate 1s infinite alternate linear;
+}
+
+button {
+  background: transparent;
+  border: 0;
+  cursor: pointer;
+}
+
+.control {
+  border: 0;
+  outline: none;
+  width: 100%;
+  height: 40px;
+  padding: 0 56px 0 16px;
+  border-radius: 6px;
+  background: #f4f5f7;
+  color: #5a4f79;
+  font-family: inherit;
+  font-size: 15px;
+  transition: 0.4s;
+  margin-top: 12px;
+}
+
+.control:focus {
+  border-color: rgb(0 0 0 / 30%);
+}
+
+.card {
+  width: 400px;
+  padding: 30px 30px 30px;
+  border-radius: 1rem;
+  background: #ffffff;
+  text-align: center;
+}
+
+.card > img {
+  width: 240px;
+}
+
+.card > h2 {
+  font-size: 20px;
+  font-weight: 600;
+  margin:0;
+  padding: 0;
+}
+
+.card > p {
+  margin:0;
+  margin-bottom: 5px;
+  margin-top: 15px;
+  font-size: 12px;
+}
+
+.card > p > a{
+ text-decoration: none;
+ color: #1c98dd;
+}
+
+.form {
+  width: 100%;
+  margin: 0;
+  display: grid;
+}
+
+.form input.control::placeholder {
+  color: #aaa7bc;
+}
+
+.form > button.control {
+  cursor: pointer;
+  width: 100%;
+  height: 40px;
+  padding: 0 16px;
+  background: #1c98dd;
+  color: #f9f9f9;
+  border: 0;
+  border-radius: 6px;
+  font-family: inherit;
+  font-size: 16px;
+  font-weight: 600;
+  text-align: center !important;
+  text-transform: uppercase;
+  letter-spacing: 2px;
+  transition: all 0.375s;
+}
+
+.form > button.control:hover{
+  cursor: pointer;
+  width: 100%;
+  height: 40px;
+  padding: 0 16px;
+  background: #1a87c1;
+  color: #f9f9f9;
+  border: 0;
+  border-radius: 6px;
+  font-family: inherit;
+  font-size: 16px;
+  font-weight: 600;
+  text-align: center;
+  text-transform: uppercase;
+  letter-spacing: 2px;
+  transition: all 0.375s;
+}
+
+.password {
+  position: relative;
+}
+
+.toggle {
+  position: absolute;
+  top: 50%;
+  right: 16px;
+  translate: 0 -50%;
+  width: 30px;
+  height: 30px;
+  background-image: url("show.svg");
+  background-size: 85%;
+  background-position: center;
+  background-repeat: no-repeat;
+  margin-top: 6px;
+}
+
+.toggle.showing {
+  background-image: url("hide.svg");
+}
+
+.error-message {
+  text-align: start;
+  color: red;
+  font-size: 12px;
+  margin-top: 2px !important;
+  padding-top: 2px !important;
+}

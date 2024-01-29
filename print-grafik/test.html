@@ -1,0 +1,200 @@
+
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Test Print</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <style>
+	.ukuran {
+		size:A4;
+	}
+
+	page[size="A4"] {
+	  background: white;
+	  width: 21cm;
+	  height: 29.7cm;
+	  display: block;
+	  margin: 0 auto;
+	  margin-bottom: 0.5cm;
+	  html, body {
+		width: 210mm;
+		height: 297mm;
+	  }
+	}
+
+    .tablee {
+        font-family: Segoe, "Segoe UI", "DejaVu Sans", "Trebuchet MS", Verdana, sans-serif;
+    }
+
+	@media print {
+        body {
+            size: auto;
+            margin: 0;
+            box-shadow: 0;
+        }
+        page[size="A4"] {
+            margin: 0;
+            size: auto;
+            box-shadow: 0;
+        }
+        .page-break	{ display: block; page-break-before: always; }
+        .no-print, .no-print *
+        {
+            display: none !important;
+        }
+    }
+    </style>
+</head>
+
+<body>
+    <div class="container my-5">
+        <form method="post" class="no-print">
+            <div class="row d-flex justify-content-center">
+                <div class="">
+                    <button type="button" id="actprint" class="btn btn-dark bg-button text-decoration-none no-print">Print</button>
+                    <button type="button" id="downloadBtn" class="btn btn-dark bg-button text-decoration-none" onclick="return confirm('Download file PDF?')">Download</button>
+                </div>
+            </div>
+        </form>
+    </div>
+    <page size="A4" class="mx-auto">
+        <div id="printable">
+            <h2 class="text-center fw-bold">DATA GRAFIK</h2>
+            <hr>
+            <div class="row mt-5 mb-4">
+                <div class="col">
+                    <ul id="dataList" class="list-group rounded-0" style="width: 100%;">
+                    </ul> 
+                </div>
+            </div>   
+            <div class="row mb-4">
+                <div class="col">
+                    <div class="card rounded-0 shadow-none">
+                        <div class="card-body p-2">
+                            <div>
+                                <canvas id="lineChart" height="250"></canvas>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="col">
+                    <div class="card rounded-0 shadow-none">
+                        <div class="card-body p-2">
+                            <div>
+                                <canvas id="barChart" height="250"></canvas>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col">
+                    <div class="card rounded-0 shadow-none">
+                        <div class="card-body p-2">
+                            <div>
+                                <canvas id="pieChart"></canvas>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="col">
+                    <div class="card rounded-0 shadow-none">
+                        <div class="card-body p-2">
+                            <div>
+                                <canvas id="doughnutChart"></canvas>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </page>
+<script src="https://elab4.000webhostapp.com/js/jquery-1.10.2.js"></script>
+
+<script>
+    document.addEventListener('DOMContentLoaded', () => {
+    document.getElementById('actprint').addEventListener('click', () => {
+        window.print();
+    });
+    
+    // Function to convert the "printable" div to PDF
+    function downloadPrintableAsPDF() {
+        const element = document.getElementById('printable'); // Get the element by ID
+    
+        html2pdf()
+            .from(element)
+            .save('EPORA-Grafik.pdf'); // Specify the filename for the PDF
+    }
+    
+    // Add a click event listener to the button
+    document.getElementById('downloadBtn').addEventListener('click', downloadPrintableAsPDF);
+    
+});
+</script>
+<script>
+    const canvasIds = ['lineChart', 'barChart', 'pieChart', 'doughnutChart'];
+
+    const data = {
+        labels: ['January', 'February', 'March', 'April', 'May'],
+        datasets: [
+            {
+                label: 'Dataset 1 (Line)',
+                data: [10, 20, 15, 25, 30],
+                borderColor: 'rgba(149, 35, 35, 0.416)',
+                borderWidth: 2,
+                cubicInterpolationMode: 'monotone',
+                fill: true,
+                backgroundColor: 'rgba(149, 35, 35, 0.416)',
+            },
+            {
+                label: 'Dataset 2 (Line)',
+                data: [30, 10, 10, 5, 50],
+                borderColor: 'rgba(224, 140, 112, 0.648)',
+                borderWidth: 2,
+                cubicInterpolationMode: 'monotone',
+                fill: true,
+                backgroundColor: 'rgba(224, 140, 112, 0.648)',
+            },
+        ]
+    };
+
+    const commonOptions = {
+        scales: {
+            y: {
+                beginAtZero: true
+            }
+        }
+    };
+
+    canvasIds.forEach((canvasId, index) => {
+        const canvas = document.getElementById(canvasId).getContext('2d');
+        const config = {
+            type: index === 0 ? 'line' : index === 1 ? 'bar' : index === 2 ? 'pie' : 'doughnut',
+            data: data,
+            options: commonOptions,
+        };
+        new Chart(canvas, config);
+    });
+
+    function displayDataInList() {
+            const dataList = document.getElementById('dataList');
+            data.labels.forEach((label, index) => {
+                const listItem = document.createElement('li');
+                listItem.className = 'list-group-item';
+                listItem.textContent = `${label}: ${data.datasets[0].label} - ${data.datasets[0].data[index]}, ${data.datasets[1].label} - ${data.datasets[1].data[index]}`;
+                dataList.appendChild(listItem);
+            });
+        }
+
+    displayDataInList();
+</script>
+
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/html2pdf.js/0.9.3/html2pdf.bundle.min.js"></script>
+
+
+
+</body>
+</html>
