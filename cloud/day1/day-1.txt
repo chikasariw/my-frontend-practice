@@ -1,0 +1,18 @@
+Identitas: Chika Sari W. / XI RPL C
+
+1. Bucket-1 (Virginia): arn:aws:s3:::bucket-1-chika
+- https://bucket-1-chika.s3.amazonaws.com/kucing1 (public)
+- https://bucket-1-chika.s3.amazonaws.com/kucing2 (public)
+- https://bucket-1-chika.s3.amazonaws.com/kucing3
+- https://bucket-1-chika.s3.amazonaws.com/kucing4
+- https://bucket-1-chika.s3.amazonaws.com/kucing5 (public)
+
+2. Bucket-2 (Oregon): arn:aws:s3:::bucket-2-chika (all public)
+- https://bucket-2-chika.s3.us-west-2.amazonaws.com/raib
+- https://bucket-2-chika.s3.us-west-2.amazonaws.com/gambar5
+- https://bucket-2-chika.s3.us-west-2.amazonaws.com/gambar4
+- https://bucket-2-chika.s3.us-west-2.amazonaws.com/gambar3
+- https://bucket-2-chika.s3.us-west-2.amazonaws.com/gambar2
+
+3. Bucket-3
+- http://bucket-3-chika.s3-website-us-east-1.amazonaws.com

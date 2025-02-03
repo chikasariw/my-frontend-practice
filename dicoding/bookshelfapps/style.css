@@ -1,0 +1,29 @@
+body {
+    font-family: "Urbanist", sans-serif !important;
+    font-optical-sizing: auto;
+    font-size: 0.96rem !important;
+    letter-spacing: 0.8px;
+}
+
+label {
+    font-size: 0.96rem !important;
+}
+
+button {
+    font-size: 0.96rem !important;
+    letter-spacing: 1.2px;
+}
+
+.rounded-pill {
+    border-radius: 50rem !important;
+}
+
+.btn-icon {
+    padding: 0;
+    width: calc(1.6rem + 2px);
+    height: calc(1.6rem + 2px);
+    display: inline-flex;
+    flex-shrink: 0;
+    justify-content: center;
+    align-items: center;
+}
